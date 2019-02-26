@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CityData } from '../models/city-weather.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-weather-forecast',
@@ -41,9 +42,13 @@ export class WeatherForecastComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
+  }
+
+  showForecastDetails(cityId) {
+    this.router.navigateByUrl(`city-forecast/${cityId}`);
   }
 
 }
