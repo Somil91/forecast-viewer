@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+
+import { EndpointService } from '../endpoint.service';
+import { CityWeather } from '../models/city-weather.model';
+
 @Component({
   selector: 'app-city-search',
   templateUrl: './city-search.component.html',
@@ -7,9 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CitySearchComponent implements OnInit {
 
-  constructor() { }
+  public cityWeatherDetails: CityWeather;
+  constructor(private endpointService: EndpointService) { }
 
   ngOnInit() {
+
   }
 
 }
