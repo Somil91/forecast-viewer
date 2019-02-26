@@ -6,12 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
-import {MatSpinner, MatGridList, MatGridTile} from '@angular/material';
+import {MatSpinner, MatButtonModule, MatButtonToggleModule,
+  MatGridList, MatGridTile} from '@angular/material';
 
 import { WeatherForecastComponent } from './weather-forecast/weather-forecast.component';
 import { CityForecastDetailsComponent } from './city-forecast-details/city-forecast-details.component';
 import { CityForecastOverviewComponent } from './city-forecast-overview/city-forecast-overview.component';
-import { CitySearchComponent } from './city-search/city-search.component';
 
 @NgModule({
   declarations: [
@@ -19,16 +19,17 @@ import { CitySearchComponent } from './city-search/city-search.component';
     WeatherForecastComponent,
     CityForecastDetailsComponent,
     CityForecastOverviewComponent,
-    CitySearchComponent,
     MatSpinner,
     MatGridList,
-    MatGridTile
+    MatGridTile,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonToggleModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

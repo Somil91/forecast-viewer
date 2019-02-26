@@ -1,39 +1,112 @@
+<div>
 
 
-<div class="row center-xs">
-    <div class="col-xs-6">
-      <h1>Weather Details for : </h1>
-      <br />
+  <div *ngIf="isLoading; else elseCityForecastBlock">
+    <div class="row center-xs around-xs">
+      <div class="col-xs-6">
+        <span>Loading city weather report .....</span>
+        <br />
+        <mat-spinner></mat-spinner>
+      </div>
     </div>
   </div>
-  
-  <div class="row start-xs between-xs" [ngStyle]="{'margin.em': 2}">
-    <div class="col-xs-12">
-      <div class="row around-xs">
-        <div class="col-xs-12">
-          
-        </div>
+
+  <ng-template #elseCityForecastBlock>
+    <div class="row start-xs around-xs">
+      <div class="col-xs-6">
+        <h1>{{forecastDetails.city.name}} &nbsp;</h1>
+        <span>{{forecastDetails.city.country}}</span> 
+        <!-- <span>{{new Date() | date: 'shortDate' }} }}</span> -->
+        <!-- span>{{cityWeatherDetails.temp.main | number:'.0-1'}} &#176; C</span> -->
       </div>
 
-
-      <!-- <mat-grid-list cols="2" gutterSize="12" rowHeight="3:1" >
-          <ng-container *ngFor="let cityData of cities; index as i">
-            <mat-grid-tile>
-              <app-city-forecast-overview [city]="cityData" (click)="showForecastDetails(cityData.id)">
-              </app-city-forecast-overview>
-            </mat-grid-tile>
+      <div class="col-xs-6">
+        <mat-button-toggle-group name="Date Selection" aria-label="Date Selection"
+        [(value)] = "selectedDate" >
+          <ng-container *ngFor="let item of forecastDetails.records | keyvalue">
+            <mat-button-toggle [value]="item.key"
+            (change)="filterReportBy(item.key)">
+              {{item.key | date: 'E, MMM d'}}
+            </mat-button-toggle>
           </ng-container>
-        </mat-grid-list> -->
-  
-      <!-- <div class="row between-xs">
-        <div *ngFor="let cityData of cities; index as i; first as isFirst" class="col-xs-12 col-md-6">
-          <div [ngStyle]="{'margin.em': 2}">
-            <app-city-forecast-overview [city]="cityData">
-            </app-city-forecast-overview>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+
+    <div class="row start-xs around-xs">
+      <div class="col-xs-12">
+        
+        <div class="row">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-1" 
+          *ngFor="let item of selectedForecast.intervals">
+           <p>{{item | date: 'h:mm a'}}</p>
           </div>
         </div>
-      </div> -->
+
+        <div class="row">
+            <div class="col-xs-2">Weather</div>
+            <div class="col-xs-1" 
+            *ngFor="let item of selectedForecast.weather">
+              <img src="{{item.iconUrl}}" /> <br />
+             <span>{{item.description}}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-2">Temp</div>
+            <div class="col-xs-1" 
+            *ngFor="let item of selectedForecast.temp">
+             <span>
+                <sub>{{item.max | number:'.0-1'}}</sub> &nbsp;
+                {{item.main | number:'.0'}}<sup>&#176;C </sup>&nbsp;
+                <sub>{{item.min  | number:'.0-1'}}</sub>
+              </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-2">Cloudy</div>
+            <div class="col-xs-1" 
+            *ngFor="let item of selectedForecast.weatherParams">
+             <ng-container *ngIf="item.cloudiness; else elseNoCloud">
+               <span>{{item.cloudiness}} &#37;</span>
+             </ng-container>
+             <ng-template #elseNoCloud>
+               <span>---</span>
+             </ng-template>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-2">Rain</div>
+            <div class="col-xs-1" 
+            *ngFor="let item of selectedForecast.weatherParams">
+             <ng-container *ngIf="item.rain; else elseNoRain">
+               <span>{{item.rain | number:'.0-1'}} mm</span>
+             </ng-container>
+             <ng-template #elseNoRain>
+                <span>---</span>
+             </ng-template>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-2">Snow</div>
+            <div class="col-xs-1" 
+            *ngFor="let item of selectedForecast.weatherParams">
+             <ng-container *ngIf="item.snow; else elseNoSnow">
+               <span>{{item.snow}}</span>
+             </ng-container>
+             <ng-template #elseNoSnow>
+               <span>---</span>
+             </ng-template>
+            </div>
+        </div>
+
+      </div>
     </div>
-  </div>
-  
-  
+  </ng-template>
+
+</div>

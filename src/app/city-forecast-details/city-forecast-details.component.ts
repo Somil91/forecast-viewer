@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 
 import { EndpointService } from '../endpoint.service';
-import { CityWeather, CityData } from '../models/city-weather.model';
+import { CityForecast } from '../models/city-weather.model';
 @Component({
   selector: 'app-city-forecast-details',
   templateUrl: './city-forecast-details.component.html',
@@ -12,7 +12,9 @@ import { CityWeather, CityData } from '../models/city-weather.model';
 export class CityForecastDetailsComponent implements OnInit {
 
   isLoading = false;
-  forecastDetails ;
+  forecastDetails: CityForecast;
+  selectedForecast;
+  selectedDate: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,15 +26,41 @@ export class CityForecastDetailsComponent implements OnInit {
   }
 
   getCityDetails() {
+    this.isLoading = true;
     const cityId = Number(this.route.snapshot.paramMap.get('id'));
     this.endpointService.getCityForecast(cityId)
       .subscribe(
         (details) => {
+          this.forecastDetails = details;
+          this.selectedDate = this.selectFirstDate();
+          this.filterReportBy(this.selectedDate);
+          console.log('selected Date', this.selectedDate);
           console.log('Details Received', details);
-          this.forecastDetails = details
           this.isLoading = false;
         }
-      )
+      );
+  }
+  /**
+   * This is to get the first key (first date) to make the default toggle button selected.
+   * as Object.keys() doesn't always returns first key.
+   */
+  selectFirstDate() {
+    let currentDate = Object.keys(this.forecastDetails.records)[0];
+    for (const key in this.forecastDetails.records) {
+        if (new Date(currentDate) <= new Date(key)) {
+          currentDate = key;
+        }
+      }
+    return currentDate;
+  }
+
+
+  filterReportBy(value) {
+    console.log(value);
+    this.selectedForecast = {};
+    this.selectedForecast = this.forecastDetails.records[value];
+    this.selectedDate = value;
+    console.log(this.selectedForecast);
   }
 
 }

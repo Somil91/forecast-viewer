@@ -59,10 +59,13 @@ export interface ForecastRecords {
     };
 }
 
+
+
+
 export class CityForecast {
     constructor(
         public records: ForecastRecords,
-        public city: CityData,
+        public city?: CityData,
     ) { }
 }
 
@@ -101,7 +104,7 @@ export class CityForecastAdapter implements ResponseAdapter<CityForecast> {
         if (list.length) {
             list.map((el: any) => {
                 const weatherData: Weather = el.weather[0];
-                weatherData.iconUrl = `http://openweathermap.org/img/w/${weatherData.icon}+'.png}`;
+                weatherData.iconUrl = `http://openweathermap.org/img/w/${weatherData.icon}.png`;
                 const temperatureData: Temperature = {
                     main: el.main.temp, max: el.main.temp_min, min: el.main.temp_min
                 };
@@ -129,7 +132,7 @@ export class CityForecastAdapter implements ResponseAdapter<CityForecast> {
         }
 
         const cityData: CityData = {
-            id: city.id, name: city.name
+            id: city.id, name: city.name, country: city.country
         };
 
         console.log("Verfied,", allForecastRecords, cityData);
