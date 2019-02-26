@@ -1,3 +1,5 @@
+
+
 <div class="row center-xs">
   <div class="col-xs-6">
     <h1>Forecast Viewer</h1>
@@ -5,16 +7,29 @@
   </div>
 </div>
 
-<div class="row start-xs around-xs"[ngStyle]="{'margin.em': 2}">
+<div class="row start-xs between-xs" [ngStyle]="{'margin.em': 2}">
   <div class="col-xs-12">
-    <div class="row around-xs">
-      <div *ngFor="let cityData of cities; index as i; first as isFirst" 
-      class="col-xs-12 col-md-6">
-     
-          <app-city-forecast-overview [city]="cityData">
-          </app-city-forecast-overview>
-
+    <div class="row between-xs">
+      <div class="col-xs-12">
+        <mat-grid-list cols="2" gutterSize="12" rowHeight="3:1" >
+          <ng-container *ngFor="let cityData of cities; index as i;" class="col-xs-12 col-md-6">
+            <mat-grid-tile>
+              <app-city-forecast-overview [city]="cityData">
+              </app-city-forecast-overview>
+            </mat-grid-tile>
+          </ng-container>
+        </mat-grid-list>
       </div>
     </div>
+
+    <!-- <div class="row between-xs">
+      <div *ngFor="let cityData of cities; index as i; first as isFirst" class="col-xs-12 col-md-6">
+        <div [ngStyle]="{'margin.em': 2}">
+          <app-city-forecast-overview [city]="cityData">
+          </app-city-forecast-overview>
+        </div>
+      </div>
+    </div> -->
   </div>
 </div>
+

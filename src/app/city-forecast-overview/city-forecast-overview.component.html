@@ -1,4 +1,7 @@
-<div>
+<div class="city-container"
+[ngStyle]="{'background': 'url(' + city.imageUrl + ')', 'background-position': 'center'}">
+
+  <div class="city-content">
   <div *ngIf="isLoading; else elseCityBlock">
       <span>Loading City Weather Report .....</span> 
       <br/>
@@ -6,8 +9,8 @@
   </div>
 
   <ng-template #elseCityBlock>
-    <div class="city-container">
-        <div class="city-content">
+    <div class="">
+        <div class="">
             
           <div class="row start-xs between-xs">
               <div class="col-xs-6">
@@ -59,11 +62,11 @@
       
               </div>
         </div>
-        <div class="shade-overlay"></div>
+        <!-- <div class="shade-overlay"></div> -->
     </div>  
   </ng-template>
-  
-
+</div>
+  <div class="shade-overlay"></div>
 </div>
 
 

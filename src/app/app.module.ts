@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
-import {MatSpinner} from '@angular/material';
+import {MatSpinner, MatGridList, MatGridTile} from '@angular/material';
 
 import { WeatherForecastComponent } from './weather-forecast/weather-forecast.component';
 import { CityForecastDetailsComponent } from './city-forecast-details/city-forecast-details.component';
@@ -20,7 +20,9 @@ import { CitySearchComponent } from './city-search/city-search.component';
     CityForecastDetailsComponent,
     CityForecastOverviewComponent,
     CitySearchComponent,
-    MatSpinner
+    MatSpinner,
+    MatGridList,
+    MatGridTile
   ],
   imports: [
     BrowserModule,
