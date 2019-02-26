@@ -47,7 +47,7 @@ export class CityWeather  {
 }
 
 /**
- * String key to hold date format till year only ( not using moment.js )
+ * String key to hold date format till year only
  * Needed this for filtering or grouping of the data set by date
  */
 export interface ForecastRecords {

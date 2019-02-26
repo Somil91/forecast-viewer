@@ -37,7 +37,7 @@
       <div class="col-xs-12">
         
         <div class="row">
-          <div class="col-xs-2"></div>
+          <div class="col-xs-1 col-xs-offset-1"></div>
           <div class="col-xs-1" 
           *ngFor="let item of selectedForecast.intervals">
            <p>{{item | date: 'h:mm a'}}</p>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-2">Weather</div>
+            <div class="col-xs-1 col-xs-offset-1">Weather</div>
             <div class="col-xs-1" 
             *ngFor="let item of selectedForecast.weather">
               <img src="{{item.iconUrl}}" /> <br />
@@ -54,7 +54,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-2">Temp</div>
+            <div class="col-xs-1 col-xs-offset-1">Temp</div>
             <div class="col-xs-1" 
             *ngFor="let item of selectedForecast.temp">
              <span>
@@ -66,7 +66,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-2">Cloudy</div>
+            <div class="col-xs-1 col-xs-offset-1">Cloudy</div>
             <div class="col-xs-1" 
             *ngFor="let item of selectedForecast.weatherParams">
              <ng-container *ngIf="item.cloudiness; else elseNoCloud">
@@ -80,7 +80,7 @@
 
 
         <div class="row">
-            <div class="col-xs-2">Rain</div>
+            <div class="col-xs-1 col-xs-offset-1">Rain</div>
             <div class="col-xs-1" 
             *ngFor="let item of selectedForecast.weatherParams">
              <ng-container *ngIf="item.rain; else elseNoRain">
@@ -93,7 +93,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-2">Snow</div>
+            <div class="col-xs-1 col-xs-offset-1">Snow</div>
             <div class="col-xs-1" 
             *ngFor="let item of selectedForecast.weatherParams">
              <ng-container *ngIf="item.snow; else elseNoSnow">
