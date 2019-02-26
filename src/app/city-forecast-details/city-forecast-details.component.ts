@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { EndpointService } from '../endpoint.service';
 import { CityForecast } from '../models/city-weather.model';
+
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-city-forecast-details',
   templateUrl: './city-forecast-details.component.html',
@@ -15,6 +18,7 @@ export class CityForecastDetailsComponent implements OnInit {
   forecastDetails: CityForecast;
   selectedForecast;
   selectedDate: string;
+  fiveDaysOverviewData;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +38,7 @@ export class CityForecastDetailsComponent implements OnInit {
           this.forecastDetails = details;
           this.selectedDate = this.selectFirstDate();
           this.filterReportBy(this.selectedDate);
+          this.tranformDataForOverviewChart();
           console.log('selected Date', this.selectedDate);
           console.log('Details Received', details);
           this.isLoading = false;
@@ -54,7 +59,6 @@ export class CityForecastDetailsComponent implements OnInit {
     return currentDate;
   }
 
-
   filterReportBy(value) {
     console.log(value);
     this.selectedForecast = {};
@@ -63,4 +67,26 @@ export class CityForecastDetailsComponent implements OnInit {
     console.log(this.selectedForecast);
   }
 
+  tranformDataForOverviewChart() {
+    const dataSet = [];
+    Object.keys(this.forecastDetails.records).map(key => {
+      const seriesName = moment(key).format('MMM Do');
+      const record = {
+        name: seriesName,
+        series: []
+      };
+      for (let index = 0; index < this.forecastDetails.records[key].intervals.length; index++) {
+        const element = {
+          name: moment(this.forecastDetails.records[key].intervals[index]).format('h a'),
+          value: this.forecastDetails.records[key].temp[index].main,
+        };
+        record.series.push(element);
+        }
+      dataSet.push(record);
+      });
+    console.log("Chart Data", dataSet);
+    this.fiveDaysOverviewData = dataSet;
+  }
+
 }
+

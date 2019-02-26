@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {MatSpinner, MatButtonModule, MatButtonToggleModule,
   MatGridList, MatGridTile} from '@angular/material';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 import { WeatherForecastComponent } from './weather-forecast/weather-forecast.component';
 import { CityForecastDetailsComponent } from './city-forecast-details/city-forecast-details.component';
@@ -28,6 +29,7 @@ import { CityForecastOverviewComponent } from './city-forecast-overview/city-for
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgxChartsModule,
     MatButtonToggleModule,
     MatButtonModule
   ],

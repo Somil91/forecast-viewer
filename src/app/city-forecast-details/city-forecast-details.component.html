@@ -107,6 +107,28 @@
 
       </div>
     </div>
+
+
+    <div class="row center-xs">
+      <div class="col-xs-12">
+        Overview of temperature for upcoming days 
+      </div>
+      <br />
+
+      <div class="col-md-6">
+          <ngx-charts-line-chart
+          [results]="fiveDaysOverviewData"
+          [autoScale]="autoScale"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [legendPosition]="bottom"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          >
+        </ngx-charts-line-chart>
+      </div>
+    </div>
   </ng-template>
 
 </div>
