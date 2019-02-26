@@ -8,6 +8,7 @@ export interface Weather {
     name: string;
     description: string;
     icon: string;
+    iconUrl: string;
 }
 
 export interface Temperature {
@@ -49,6 +50,7 @@ export class CityWeatherAdapter implements ResponseAdapter<CityWeather> {
     adapt(item: any): CityWeather {
         const {weather, main, wind} = item;
         const weatherData: Weather = weather[0];
+        weatherData.iconUrl = 'http://openweathermap.org/img/w/';
         const temperatureData: Temperature = {
             main: main.temp, max: main.temp_min, min: main.temp_min, humidity: main.humidity
         };

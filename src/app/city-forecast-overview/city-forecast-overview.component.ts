@@ -9,15 +9,20 @@ import { CityWeather, CityData } from '../models/city-weather.model';
 })
 export class CityForecastOverviewComponent implements OnInit {
   @Input() city: CityData;
-  public cityWeatherDetails: CityWeather;
+  cityWeatherDetails: CityWeather;
+  isLoading = false;
+  // weatherIcon = '';
   constructor(private endpointService: EndpointService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.endpointService.getCityWeatherReport(this.city.id)
     .subscribe(
       (cityData) => {
         console.log('city Data Received', cityData);
         this.cityWeatherDetails = cityData;
+        this.isLoading = false;
+        // this.weatherIcon = `http://openweathermap.org/img/w/${cityData.weather.icon}.png`
       }
     );
   }

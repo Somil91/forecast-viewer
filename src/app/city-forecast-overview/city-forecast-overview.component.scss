@@ -1,0 +1,32 @@
+.city-container {
+    background: #000 url(http://www.publicdomainpictures.net/pictures/30000/velka/autumn-forest-1351265582Bf1.jpg);
+    color: #fff;
+    width: 100%;
+    display:flex;
+    position: relative;
+}
+
+.shade-overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.87);
+    opacity: .78;
+    position: absolute;
+}
+
+.city-content {
+    color: white;
+    z-index: 1;
+    padding: 2em;
+    width: 100%;
+}
+
+.icon-block {
+    display: flex;
+    align-items: center;
+}
+
+.city-details {
+    margin-top: 5em;
+}
+

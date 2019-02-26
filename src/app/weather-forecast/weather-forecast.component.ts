@@ -15,12 +15,12 @@ export class WeatherForecastComponent implements OnInit {
       imageUrl: 'https://unsplash.com/photos/xQQShnDWY-Q',
       country: 'Netherlands'
     },
-    // {
-    //   id: 3067696,
-    //   name: 'Prague',
-    //   imageUrl: 'https://unsplash.com/photos/oUz3TepCSko',
-    //   country: 'Czech Republic'
-    // },
+    {
+      id: 3067696,
+      name: 'Prague',
+      imageUrl: 'https://unsplash.com/photos/oUz3TepCSko',
+      country: 'Czech Republic'
+    },
     // {
     //   id: 2988507,
     //   name: 'Paris',

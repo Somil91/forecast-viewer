@@ -1,3 +1,72 @@
-<p>
-  city-forecast-overview works!
-</p>
+<div>
+  <div *ngIf="isLoading; else elseCityBlock">
+      <span>Loading City Weather Report .....</span> 
+      <br/>
+      <mat-spinner></mat-spinner>
+  </div>
+
+  <ng-template #elseCityBlock>
+    <div class="city-container">
+        <div class="city-content">
+            
+          <div class="row start-xs between-xs">
+              <div class="col-xs-6">
+                <h1>{{city.name}} &nbsp; <span>{{cityWeatherDetails.temp.main | number:'.0-1'}} &#176; C</span></h1>
+                <span>{{city.country}}</span>
+              </div>
+    
+              <div class="col-xs-2 col-xs-offset-4">
+                    <div class="icon-block">
+                    <img 
+                    src="{{cityWeatherDetails.weather.iconUrl+cityWeatherDetails.weather.icon+'.png'}}" 
+                    />
+                    <span>{{cityWeatherDetails.weather.description}}</span>
+                  </div>
+              </div>
+          </div>
+            
+          <div class="row start-xs between-xs city-details">
+            <div class="col-xs-4">
+              
+              <div class="row">
+                <div class="col-xs-12">
+                  <p>{{cityWeatherDetails.wind.speed}} &nbsp; m/s</p>
+                </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-xs-12">
+                    <span [ngStyle]="{'margin-right': '20px'}">Sunrise&nbsp;
+                      {{cityWeatherDetails.city.sunrise | date:'shortTime'}} <br/>
+                    </span>
+                    <span [ngStyle]="{'margin-right': '20px'}">Sunset&nbsp;
+                        {{cityWeatherDetails.city.sunset | date:'shortTime'}} <br/>
+                      </span>
+                  </div>
+                </div>
+          </div>
+      
+                <!-- <div class="col-xs-1 col-xs-offset-5">
+                    <div *ngIf="isLoading; else elseIconBlock">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                    <ng-template #elseIconBlock>
+                      <img 
+                      src="{{cityWeatherDetails.weather.iconUrl+cityWeatherDetails.weather.icon+'.png'}}" 
+                      />
+                    </ng-template>
+                </div> -->
+      
+              </div>
+        </div>
+        <div class="shade-overlay"></div>
+    </div>  
+  </ng-template>
+  
+
+</div>
+
+
+
+
+  
