@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WeatherForecastComponent } from './weather-forecast/weather-forecast.component';
-import { CityForecastDetailsComponent } from './city-forecast-details/city-forecast-details.component';
+import { WeatherForecastComponent } from './weather-report/weather-forecast/weather-forecast.component';
+import { CityForecastDetailsComponent } from './weather-report/city-forecast-details/city-forecast-details.component';
 
 
 

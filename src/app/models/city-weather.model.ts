@@ -117,7 +117,7 @@ export class CityForecastAdapter implements ResponseAdapter<CityForecast> {
                 const key = ((el.dt_txt).substr(0, 10));
 
                 // Group and merge with the help of keys ( To group by dates )
-                // This is kind of mimicing server logic on client side, as server should 
+                // This is kind of mimicing server logic on client side, as server should
                 // respond with the required format.
                 if (!allForecastRecords.hasOwnProperty(key)) {
                     allForecastRecords[key] = {
@@ -135,7 +135,7 @@ export class CityForecastAdapter implements ResponseAdapter<CityForecast> {
             id: city.id, name: city.name, country: city.country
         };
 
-        console.log("Verfied,", allForecastRecords, cityData);
+        console.log('Verfied,', allForecastRecords, cityData);
         return new CityForecast(
             allForecastRecords , cityData
         );

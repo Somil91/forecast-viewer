@@ -1,37 +1,27 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
-import {MatSpinner, MatButtonModule, MatButtonToggleModule,
-  MatGridList, MatGridTile} from '@angular/material';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { AppRoutingModule } from './app-routing.module';
+// import { SharedModule } from './shared/shared.module';
+import { WeatherReportModule } from './weather-report/weather-report.module';
 
-import { WeatherForecastComponent } from './weather-forecast/weather-forecast.component';
-import { CityForecastDetailsComponent } from './city-forecast-details/city-forecast-details.component';
-import { CityForecastOverviewComponent } from './city-forecast-overview/city-forecast-overview.component';
+import { AppComponent } from './app.component';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    WeatherForecastComponent,
-    CityForecastDetailsComponent,
-    CityForecastOverviewComponent,
-    MatSpinner,
-    MatGridList,
-    MatGridTile,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    NgxChartsModule,
-    MatButtonToggleModule,
-    MatButtonModule
+    AppRoutingModule,
+    WeatherReportModule
   ],
   providers: [],
   bootstrap: [AppComponent]

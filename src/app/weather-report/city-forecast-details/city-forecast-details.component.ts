@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-
-import { EndpointService } from '../endpoint.service';
-import { CityForecast } from '../models/city-weather.model';
+import { EndpointService } from '../../services/endpoint.service';
+import { CityForecast } from '../../models/city-weather.model';
 
 import * as moment from 'moment';
 
@@ -84,7 +83,7 @@ export class CityForecastDetailsComponent implements OnInit {
         }
       dataSet.push(record);
       });
-    console.log("Chart Data", dataSet);
+    console.log('Chart Data', dataSet);
     this.fiveDaysOverviewData = dataSet;
   }
 

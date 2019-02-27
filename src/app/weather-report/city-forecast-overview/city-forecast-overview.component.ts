@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { EndpointService } from '../endpoint.service';
-import { CityWeather, CityData } from '../models/city-weather.model';
+import { EndpointService } from '../../services/endpoint.service';
+import { CityWeather, CityData } from '../../models/city-weather.model';
+
 @Component({
   selector: 'app-city-forecast-overview',
   templateUrl: './city-forecast-overview.component.html',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CityData } from '../models/city-weather.model';
+import { CityData } from '../../models/city-weather.model';
 import { Router } from '@angular/router';
 
 @Component({
