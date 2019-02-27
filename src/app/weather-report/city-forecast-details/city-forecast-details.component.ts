@@ -51,7 +51,7 @@ export class CityForecastDetailsComponent implements OnInit {
   selectFirstDate() {
     let currentDate = Object.keys(this.forecastDetails.records)[0];
     for (const key in this.forecastDetails.records) {
-        if (new Date(currentDate) <= new Date(key)) {
+        if (new Date(currentDate) >= new Date(key)) {
           currentDate = key;
         }
       }
@@ -66,6 +66,9 @@ export class CityForecastDetailsComponent implements OnInit {
     console.log(this.selectedForecast);
   }
 
+  /**
+   * This function is used to transform datasets to be read by swimlane maps
+   */
   tranformDataForOverviewChart() {
     const dataSet = [];
     Object.keys(this.forecastDetails.records).map(key => {

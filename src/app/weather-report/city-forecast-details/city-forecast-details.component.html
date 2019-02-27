@@ -3,8 +3,8 @@
 
   <div *ngIf="isLoading; else elseCityForecastBlock">
     <div class="row center-xs around-xs">
-      <div class="col-xs-6">
-        <span>Loading city weather report .....</span>
+      <div class="col-xs-12">
+        <p>Loading city weather report .....</p>
         <br />
         <mat-spinner></mat-spinner>
       </div>
@@ -12,120 +12,130 @@
   </div>
 
   <ng-template #elseCityForecastBlock>
-    <div class="row start-xs around-xs">
-      <div class="col-xs-6">
-        <h1>{{forecastDetails.city.name}} &nbsp;</h1>
-        <span>{{forecastDetails.city.country}}</span> 
-        <!-- <span>{{new Date() | date: 'shortDate' }} }}</span> -->
-        <!-- span>{{cityWeatherDetails.temp.main | number:'.0-1'}} &#176; C</span> -->
+
+    <div class="row center-xs">
+      <div class="col-xs-2 col-xs-offset-10">
+        <a routerLink="/weather-forecast" [ngStyle]="{'text-decoration': 'none'}">&#8249;Back</a>
+      </div>
+    </div>
+
+    <div class="row center-xs around-xs">
+      <div class="col-xs-8">
+        <p class="header h2">{{forecastDetails.city.name}}&nbsp;, <span>{{forecastDetails.city.country}}</span></p>
+      </div>
+    </div>
+
+    <div class="row center-xs between-xs">
+
+      <div class="col-md-6 col-xs-12">
+        <h3 class="less-gap">Forecast for next 5 days</h3>
       </div>
 
-      <div class="col-xs-6">
-        <mat-button-toggle-group name="Date Selection" aria-label="Date Selection"
-        [(value)] = "selectedDate" >
+      <div class="col-md-6 col-xs-12">
+        <mat-button-toggle-group name="Date Selection" aria-label="Date Selection" [(value)]="selectedDate">
           <ng-container *ngFor="let item of forecastDetails.records | keyvalue">
-            <mat-button-toggle [value]="item.key"
-            (change)="filterReportBy(item.key)">
+            <mat-button-toggle [value]="item.key" (change)="filterReportBy(item.key)">
               {{item.key | date: 'E, MMM d'}}
             </mat-button-toggle>
           </ng-container>
         </mat-button-toggle-group>
       </div>
+
+
     </div>
+
+    <br /><br />
 
     <div class="row start-xs around-xs">
       <div class="col-xs-12">
-        
-        <div class="row">
-          <div class="col-xs-1 col-xs-offset-1"></div>
-          <div class="col-xs-1" 
-          *ngFor="let item of selectedForecast.intervals">
-           <p>{{item | date: 'h:mm a'}}</p>
+
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-1 mat-elevation-z4" *ngFor="let item of selectedForecast.intervals">
+            <p>{{item | date: 'h:mm a'}}</p>
           </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-1 col-xs-offset-1">Weather</div>
-            <div class="col-xs-1" 
-            *ngFor="let item of selectedForecast.weather">
-              <img src="{{item.iconUrl}}" /> <br />
-             <span>{{item.description}}</span>
-            </div>
+        <br />
+
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1 mat-elevation-z4 row-headers ">Weather</div>
+          <div class="col-xs-1 mat-elevation-z4 " *ngFor="let item of selectedForecast.weather">
+            <img src="{{item.iconUrl}}" /> <br />
+            <span>{{item.description}}</span>
+          </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-1 col-xs-offset-1">Temp</div>
-            <div class="col-xs-1" 
-            *ngFor="let item of selectedForecast.temp">
-             <span>
-                <sub>{{item.max | number:'.0-1'}}</sub> &nbsp;
-                {{item.main | number:'.0'}}<sup>&#176;C </sup>&nbsp;
-                <sub>{{item.min  | number:'.0-1'}}</sub>
-              </span>
-            </div>
+        <br />
+
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1 mat-elevation-z4 row-headers ">Temp</div>
+          <div class="col-xs-1 mat-elevation-z4" *ngFor="let item of selectedForecast.temp">
+            <p class="temp-container">
+              <span class="sub-temp-text">
+                <span>Max <br/>{{item.max | number: '2.0-1'}}</span>
+                <span>Min <br/>{{item.min | number: '2.0-1'}}</span>
+              </span> &nbsp;
+              <span class="temp-text">{{item.main | number: '2.0-1'}}<sup>&#176;C</sup></span>
+            </p>
+          </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-1 col-xs-offset-1">Cloudy</div>
-            <div class="col-xs-1" 
-            *ngFor="let item of selectedForecast.weatherParams">
-             <ng-container *ngIf="item.cloudiness; else elseNoCloud">
-               <span>{{item.cloudiness}} &#37;</span>
-             </ng-container>
-             <ng-template #elseNoCloud>
-               <span>---</span>
-             </ng-template>
-            </div>
+        <br />
+
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1 mat-elevation-z4 row-headers">Cloudy</div>
+          <div class="col-xs-1 mat-elevation-z4" *ngFor="let item of selectedForecast.weatherParams">
+            <ng-container *ngIf="item.cloudiness; else elseNoCloud">
+              <p>{{item.cloudiness}} &#37;</p>
+            </ng-container>
+            <ng-template #elseNoCloud>
+              <p>---</p>
+            </ng-template>
+          </div>
         </div>
 
+        <br />
 
-        <div class="row">
-            <div class="col-xs-1 col-xs-offset-1">Rain</div>
-            <div class="col-xs-1" 
-            *ngFor="let item of selectedForecast.weatherParams">
-             <ng-container *ngIf="item.rain; else elseNoRain">
-               <span>{{item.rain | number:'.0-1'}} mm</span>
-             </ng-container>
-             <ng-template #elseNoRain>
-                <span>---</span>
-             </ng-template>
-            </div>
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1 mat-elevation-z4 row-headers">Rain</div>
+          <div class="col-xs-1 mat-elevation-z4" *ngFor="let item of selectedForecast.weatherParams">
+            <ng-container *ngIf="item.rain; else elseNoRain">
+              <p>{{item.rain | number:'.0-1'}} mm</p>
+            </ng-container>
+            <ng-template #elseNoRain>
+              <p>---</p>
+            </ng-template>
+          </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-1 col-xs-offset-1">Snow</div>
-            <div class="col-xs-1" 
-            *ngFor="let item of selectedForecast.weatherParams">
-             <ng-container *ngIf="item.snow; else elseNoSnow">
-               <span>{{item.snow}}</span>
-             </ng-container>
-             <ng-template #elseNoSnow>
-               <span>---</span>
-             </ng-template>
-            </div>
+        <br />
+
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1 mat-elevation-z4 row-headers">Snow</div>
+          <div class="col-xs-1 mat-elevation-z4" *ngFor="let item of selectedForecast.weatherParams">
+            <ng-container *ngIf="item.snow; else elseNoSnow">
+              <p>{{item.snow}}</p>
+            </ng-container>
+            <ng-template #elseNoSnow>
+              <p>---</p>
+            </ng-template>
+          </div>
         </div>
 
       </div>
     </div>
 
-
+    <br /> <br />
     <div class="row center-xs">
       <div class="col-xs-12">
-        Overview of temperature for upcoming days 
+        <h2>Temperature comparision across days</h2>
       </div>
       <br />
 
       <div class="col-md-6">
-          <ngx-charts-line-chart
-          [results]="fiveDaysOverviewData"
-          [autoScale]="autoScale"
-          [xAxis]="true"
-          [yAxis]="true"
-          [legend]="true"
-          [legendPosition]="bottom"
-          [showXAxisLabel]="true"
-          [showYAxisLabel]="true"
-          >
+        <ngx-charts-line-chart [results]="fiveDaysOverviewData" [autoScale]="autoScale" [xAxis]="true" [yAxis]="true"
+          [legend]="true" [legendPosition]="bottom" [showXAxisLabel]="true" [showYAxisLabel]="true">
         </ngx-charts-line-chart>
       </div>
     </div>
