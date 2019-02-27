@@ -41,6 +41,9 @@ export class CityForecastDetailsComponent implements OnInit, OnDestroy {
           this.filterReportBy(this.selectedDate);
           this.tranformDataForOverviewChart();
           this.isLoading = false;
+        },
+        (error) => {
+          alert(error);
         }
       );
   }

@@ -59,9 +59,6 @@ export interface ForecastRecords {
     };
 }
 
-
-
-
 export class CityForecast {
     constructor(
         public records: ForecastRecords,
