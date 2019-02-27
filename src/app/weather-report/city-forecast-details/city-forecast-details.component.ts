@@ -40,8 +40,6 @@ export class CityForecastDetailsComponent implements OnInit, OnDestroy {
           this.selectedDate = this.selectFirstDate();
           this.filterReportBy(this.selectedDate);
           this.tranformDataForOverviewChart();
-          console.log('selected Date', this.selectedDate);
-          console.log('Details Received', details);
           this.isLoading = false;
         }
       );
@@ -63,11 +61,9 @@ export class CityForecastDetailsComponent implements OnInit, OnDestroy {
   }
 
   filterReportBy(value) {
-    console.log(value);
     this.selectedForecast = {};
     this.selectedForecast = this.forecastDetails.records[value];
     this.selectedDate = value;
-    console.log(this.selectedForecast);
   }
 
   /**
@@ -90,7 +86,6 @@ export class CityForecastDetailsComponent implements OnInit, OnDestroy {
         }
       dataSet.push(record);
       });
-    console.log('Chart Data', dataSet);
     this.fiveDaysOverviewData = dataSet;
   }
 
