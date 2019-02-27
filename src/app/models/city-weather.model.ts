@@ -135,7 +135,6 @@ export class CityForecastAdapter implements ResponseAdapter<CityForecast> {
             id: city.id, name: city.name, country: city.country
         };
 
-        console.log('Verfied,', allForecastRecords, cityData);
         return new CityForecast(
             allForecastRecords , cityData
         );

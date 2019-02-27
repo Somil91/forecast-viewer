@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './city-forecast-overview.component.html',
   styleUrls: ['./city-forecast-overview.component.scss']
 })
-export class CityForecastOverviewComponent implements OnInit , OnDestroy{
+export class CityForecastOverviewComponent implements OnInit , OnDestroy {
   @Input() city: CityData;
 
   cityWeatherDetails: CityWeather;
@@ -23,7 +23,6 @@ export class CityForecastOverviewComponent implements OnInit , OnDestroy{
     this.cityWeatherSubscription = this.endpointService.getCityWeatherReport(this.city.id)
     .subscribe(
       (cityData) => {
-        console.log('city Data Received', cityData);
         this.cityWeatherDetails = cityData;
         this.isLoading = false;
       }
