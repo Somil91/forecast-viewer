@@ -25,6 +25,9 @@ export class CityForecastOverviewComponent implements OnInit , OnDestroy {
       (cityData) => {
         this.cityWeatherDetails = cityData;
         this.isLoading = false;
+      },
+      (error) => {
+        alert(error);
       }
     );
   }
