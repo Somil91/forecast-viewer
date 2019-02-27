@@ -1,0 +1,144 @@
+<div>
+
+
+  <div *ngIf="isLoading; else elseCityForecastBlock">
+    <div class="row center-xs around-xs">
+      <div class="col-xs-12">
+        <p>Loading city weather report .....</p>
+        <br />
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #elseCityForecastBlock>
+
+    <div class="row center-xs">
+      <div class="col-xs-2 col-xs-offset-10">
+        <a routerLink="/weather-forecast" [ngStyle]="{'text-decoration': 'none'}">&#8249;Back</a>
+      </div>
+    </div>
+
+    <div class="row center-xs around-xs">
+      <div class="col-xs-8">
+        <p class="header h2">{{forecastDetails.city.name}}&nbsp;, <span>{{forecastDetails.city.country}}</span></p>
+      </div>
+    </div>
+
+    <div class="row center-xs between-xs">
+
+      <div class="col-md-6 col-xs-12">
+        <h3 class="less-gap">Forecast for next 5 days</h3>
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+        <mat-button-toggle-group name="Date Selection" aria-label="Date Selection" [(value)]="selectedDate">
+          <ng-container *ngFor="let item of forecastDetails.records | keyvalue">
+            <mat-button-toggle [value]="item.key" (change)="filterReportBy(item.key)">
+              {{item.key | date: 'E, MMM d'}}
+            </mat-button-toggle>
+          </ng-container>
+        </mat-button-toggle-group>
+      </div>
+
+
+    </div>
+
+    <br /><br />
+
+    <div class="row start-xs around-xs">
+      <div class="col-xs-12">
+
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-1 mat-elevation-z4" *ngFor="let item of selectedForecast.intervals">
+            <p>{{item | date: 'h:mm a'}}</p>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1 mat-elevation-z4 row-headers ">Weather</div>
+          <div class="col-xs-1 mat-elevation-z4 " *ngFor="let item of selectedForecast.weather">
+            <img src="{{item.iconUrl}}" /> <br />
+            <span>{{item.description}}</span>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1 mat-elevation-z4 row-headers ">Temp</div>
+          <div class="col-xs-1 mat-elevation-z4" *ngFor="let item of selectedForecast.temp">
+            <p class="temp-container">
+              <span class="sub-temp-text">
+                <span>Max <br/>{{item.max | number: '2.0-1'}}</span>
+                <span>Min <br/>{{item.min | number: '2.0-1'}}</span>
+              </span> &nbsp;
+              <span class="temp-text">{{item.main | number: '2.0-1'}}<sup>&#176;C</sup></span>
+            </p>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1 mat-elevation-z4 row-headers">Cloudy</div>
+          <div class="col-xs-1 mat-elevation-z4" *ngFor="let item of selectedForecast.weatherParams">
+            <ng-container *ngIf="item.cloudiness; else elseNoCloud">
+              <p>{{item.cloudiness}} &#37;</p>
+            </ng-container>
+            <ng-template #elseNoCloud>
+              <p>---</p>
+            </ng-template>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1 mat-elevation-z4 row-headers">Rain</div>
+          <div class="col-xs-1 mat-elevation-z4" *ngFor="let item of selectedForecast.weatherParams">
+            <ng-container *ngIf="item.rain; else elseNoRain">
+              <p>{{item.rain | number:'.0-1'}} mm</p>
+            </ng-container>
+            <ng-template #elseNoRain>
+              <p>---</p>
+            </ng-template>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row center-xs around-xs">
+          <div class="col-xs-1 mat-elevation-z4 row-headers">Snow</div>
+          <div class="col-xs-1 mat-elevation-z4" *ngFor="let item of selectedForecast.weatherParams">
+            <ng-container *ngIf="item.snow; else elseNoSnow">
+              <p>{{item.snow}}</p>
+            </ng-container>
+            <ng-template #elseNoSnow>
+              <p>---</p>
+            </ng-template>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <br /> <br />
+    <div class="row center-xs">
+      <div class="col-xs-12">
+        <h2>Temperature comparision across days</h2>
+      </div>
+      <br />
+
+      <div class="col-md-6">
+        <ngx-charts-line-chart [results]="fiveDaysOverviewData" [autoScale]="autoScale" [xAxis]="true" [yAxis]="true"
+          [legend]="true" [legendPosition]="bottom" [showXAxisLabel]="true" [showYAxisLabel]="true">
+        </ngx-charts-line-chart>
+      </div>
+    </div>
+  </ng-template>
+
+</div>

@@ -1,0 +1,28 @@
+
+.row-headers {
+    background: #3c56b5;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.temp-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.sub-temp-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+}
+
+.temp-text {
+    font-size: 20px;
+}
+
+
