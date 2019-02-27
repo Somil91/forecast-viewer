@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: #fafafa;}
+
+.header{
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    font-size: 80px;
+    letter-spacing: 5px;
+    text-shadow: -1px 2px 0px #3f51b5, -1px 2px 0px #3f51b5, 7px 3px 20px #1e2d85;
+}
+
+.less-gap {
+  line-height: 0.1em;
+}
